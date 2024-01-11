@@ -1,0 +1,14 @@
+start_port = ":8082"
+max_movies = 10000
+time_for_sleep = 10
+movie_url = "https://api.kinopoisk.dev/v1.4/movie"
+person_url = "https://api.kinopoisk.dev/v1.4/person"
+token = "9E04N6N-4ZHM7XB-MP1B4DS-NDER6P1"
+
+[database]
+scheme = "postgres"
+host = "postgres"
+port = 5432
+database = "kinopoisk"
+user = "bob"
+password = "admin"

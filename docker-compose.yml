@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  app:
+    image: app
+    links:
+      - "postgres:postgres"
+    depends_on:
+      - postgres
+    ports:
+      - "8082:8082"
+    environment:
+      - CONFIG_FILE=./config/config.toml
+      - SERVER_TYPE=app
+  postgres:
+    restart: always
+    image: "postgres:alpine"
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: bob
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: kinopoisk
+    volumes:
+      - ./db/postgresql/00001_database-init.sql:/docker-entrypoint-initdb.d/init.sql
