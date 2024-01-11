@@ -24,6 +24,4 @@ create table professions (
     person_id bigint not null,
     movie_role bigint not null,
     primary key (id),
-    foreign key (movie_id) references movie (id) on delete cascade,
-    foreign key (person_id) references person (id) on delete cascade
 );

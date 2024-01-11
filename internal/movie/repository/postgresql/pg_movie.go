@@ -47,7 +47,7 @@ func (r pgMovieRepo) GetByID(ctx context.Context, id uint64) (domain.MovieBaseIn
 		return domain.MovieBaseInfo{}, err
 	}
 
-	return movie, nil
+	return movie, err
 }
 
 func (r pgMovieRepo) GetByTitle(ctx context.Context, title string) (domain.MovieBaseInfo, error) {
@@ -81,12 +81,12 @@ func (r pgMovieRepo) GetByTitle(ctx context.Context, title string) (domain.Movie
 		err = domain.MovieNotFound
 	}
 
-	if err != nil {
+	if err != nil && err != domain.MovieNotFound {
 		logrus.Errorf("Repo error: %v", err)
 		return domain.MovieBaseInfo{}, err
 	}
 
-	return movie, nil
+	return movie, err
 }
 
 func (r pgMovieRepo) GetMovies(ctx context.Context, limit, offset uint64) ([]domain.MovieBaseInfo, error) {
@@ -127,7 +127,7 @@ func (r pgMovieRepo) GetMovies(ctx context.Context, limit, offset uint64) ([]dom
 		result = append(result, tmpMovie)
 	}
 
-	return result, nil
+	return result, err
 }
 
 func (r pgMovieRepo) Add(ctx context.Context, m *domain.MovieBaseInfo) error {

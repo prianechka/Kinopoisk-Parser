@@ -3,7 +3,7 @@ max_movies = 10000
 time_for_sleep = 10
 movie_url = "https://api.kinopoisk.dev/v1.4/movie"
 person_url = "https://api.kinopoisk.dev/v1.4/person"
-token = "9E04N6N-4ZHM7XB-MP1B4DS-NDER6P1"
+token = "1Z2189B-636M3D8-G8HC5BB-Z29PH6K"
 
 [database]
 scheme = "postgres"

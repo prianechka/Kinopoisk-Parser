@@ -5,8 +5,8 @@ import "context"
 type Person struct {
 	ID       uint64 `json:"id"`
 	FullName string `json:"full_name"`
-	Height   uint64 `json:"height"`
-	Age      uint64 `json:"age"`
+	Height   uint64 `json:"height,omitempty"`
+	Age      uint64 `json:"age,omitempty"`
 }
 
 type PersonRepository interface {

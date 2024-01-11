@@ -74,7 +74,7 @@ func (h *MovieHandler) GetMovie(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *MovieHandler) GetMovies(w http.ResponseWriter, r *http.Request) {
-	movieInfo, err := h.MUsecase.GetMovies(context.Background(), 1, 0)
+	movieInfo, err := h.MUsecase.GetMovies(context.Background(), 20, 0)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}

@@ -38,12 +38,12 @@ func (p pgPersonRepo) GetByID(ctx context.Context, id uint64) (domain.Person, er
 		err = domain.PersonNotFound
 	}
 
-	if err != nil {
+	if err != nil && err != domain.PersonNotFound {
 		logrus.Errorf("Repo error: %v", err)
 		return domain.Person{}, err
 	}
 
-	return person, nil
+	return person, err
 
 }
 
@@ -70,12 +70,12 @@ func (p pgPersonRepo) GetByFullName(ctx context.Context, title string) (domain.P
 		err = domain.PersonNotFound
 	}
 
-	if err != nil {
+	if err != nil && err != domain.PersonNotFound {
 		logrus.Errorf("Repo error: %v", err)
 		return domain.Person{}, err
 	}
 
-	return person, nil
+	return person, err
 
 }
 
@@ -117,9 +117,9 @@ func (p pgPersonRepo) GetPersons(ctx context.Context, limit, offset uint64) ([]d
 }
 
 func (p pgPersonRepo) Add(ctx context.Context, m *domain.Person) error {
-	query := `INSERT into person(full_name, age, height) VALUES ($1, $2, $3, $4);`
+	query := `INSERT into person(id, full_name, age, height) VALUES ($1, $2, $3, $4);`
 
-	_, err := p.Conn.ExecContext(ctx, query, m.FullName, m.Age, m.Height)
+	_, err := p.Conn.ExecContext(ctx, query, m.ID, m.FullName, m.Age, m.Height)
 
 	return err
 }

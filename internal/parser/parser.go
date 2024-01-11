@@ -67,8 +67,7 @@ func (p *Parser) parsePerson(index int) error {
 	}
 
 	req.Header.Add("X-API-KEY", p.Token)
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := p.sendRequest(req)
 
 	if err != nil {
 		logrus.Error(err)
@@ -168,15 +167,14 @@ func (p *Parser) parseMovie(index int) error {
 			FullName: person.Name,
 		}
 
-		logrus.Info("Profession:", person.EnProfession)
 		switch person.EnProfession {
-		case "Producer":
+		case "producer":
 			result.Producers = append(result.Producers, tmpPerson)
-		case "Director":
+		case "director":
 			result.Directors = append(result.Directors, tmpPerson)
-		case "Writer":
+		case "writer":
 			result.Writers = append(result.Writers, tmpPerson)
-		case "Actor":
+		case "actor":
 			result.Actors = append(result.Actors, tmpPerson)
 		}
 	}
